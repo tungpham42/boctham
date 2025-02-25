@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react"; // Import useRef
 import { Row, Col, Form, Button, ListGroup, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShuffle, faCopy, faRedo } from "@fortawesome/free-solid-svg-icons";
@@ -8,33 +8,32 @@ const TopicPicker = () => {
   const [topics, setTopics] = useState("");
   const [shuffledTopics, setShuffledTopics] = useState([]);
   const [error, setError] = useState("");
-  const [copyMessage, setCopyMessage] = useState(""); // Copy notification
+  const [copyMessage, setCopyMessage] = useState("");
+
+  const textareaRef = useRef(null); // Create ref
 
   const shuffleTopics = () => {
     if (!topics.trim()) {
       setError("Vui lòng nhập ít nhất một chủ đề.");
       return;
     }
-
-    setError(""); // Clear error if input is valid
-
+    setError("");
     let topicArray = topics
       .split("\n")
       .map((topic) => topic.trim())
       .filter((topic) => topic);
-
     for (let i = topicArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [topicArray[i], topicArray[j]] = [topicArray[j], topicArray[i]];
     }
-
     setShuffledTopics(topicArray);
+    textareaRef.current?.focus(); // Focus textarea
   };
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       setCopyMessage("Đã sao chép!");
-      setTimeout(() => setCopyMessage(""), 2000); // Hide message after 2s
+      setTimeout(() => setCopyMessage(""), 2000);
     });
   };
 
@@ -43,6 +42,7 @@ const TopicPicker = () => {
       .map((topic, index) => `${index + 1}. ${topic}`)
       .join("\n");
     copyToClipboard(allText);
+    textareaRef.current?.focus(); // Focus textarea
   };
 
   const resetForm = () => {
@@ -50,6 +50,7 @@ const TopicPicker = () => {
     setShuffledTopics([]);
     setError("");
     setCopyMessage("");
+    textareaRef.current?.focus(); // Focus textarea
   };
 
   return (
@@ -66,6 +67,8 @@ const TopicPicker = () => {
             value={topics}
             onChange={(e) => setTopics(e.target.value)}
             isInvalid={!!error}
+            autoFocus
+            ref={textareaRef} // Attach ref here
           />
           <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
         </Form.Group>
