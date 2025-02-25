@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, ListGroup, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShuffle } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const TopicPicker = () => {
   const [topics, setTopics] = useState("");
@@ -32,7 +33,7 @@ const TopicPicker = () => {
   return (
     <Card className="p-3 shadow-lg">
       <h1 className="h3">Bốc Thăm Nhóm Chủ Đề</h1>
-      <Form>
+      <Form className="d-flex flex-column">
         <Form.Group>
           <Form.Label>
             Nhập danh sách nhóm chủ đề (mỗi dòng một chủ đề)
@@ -46,7 +47,12 @@ const TopicPicker = () => {
           />
           <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
         </Form.Group>
-        <Button variant="primary" className="mt-2" onClick={shuffleTopics}>
+        <Button
+          size="lg"
+          variant="primary"
+          className="mt-2"
+          onClick={shuffleTopics}
+        >
           <FontAwesomeIcon icon={faShuffle} className="me-2" />
           Bốc Thăm
         </Button>
@@ -60,6 +66,16 @@ const TopicPicker = () => {
           ))}
         </ListGroup>
       )}
+      <a
+        href="https://github.com/tungpham42/boctham"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ fontSize: "1.1rem", width: "fit-content" }}
+        className="text-dark text-decoration-none mt-3"
+      >
+        <FontAwesomeIcon icon={faGithub} className="me-1" />
+        MIT License
+      </a>
     </Card>
   );
 };
