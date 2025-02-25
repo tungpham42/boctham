@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 
 function App() {
   return (
-    <Container className="mt-4 col-md-6">
+    <Container className="my-5 col-md-6 col-sm-8">
       <TopicPicker />
     </Container>
   );
