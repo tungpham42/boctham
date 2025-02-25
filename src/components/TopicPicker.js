@@ -123,6 +123,7 @@ const TopicPicker = () => {
         href="https://github.com/tungpham42/boctham"
         target="_blank"
         rel="noopener noreferrer"
+        style={{ width: "fit-content" }}
         className="text-dark text-decoration-none mt-3"
       >
         <FontAwesomeIcon icon={faGithub} className="me-1" />
