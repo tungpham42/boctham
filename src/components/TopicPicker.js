@@ -92,7 +92,7 @@ const TopicPicker = () => {
               onClick={resetForm}
             >
               <FontAwesomeIcon icon={faRedo} className="me-2" />
-              Đặt Lại
+              Làm Mới
             </Button>
           </Col>
         </Row>
