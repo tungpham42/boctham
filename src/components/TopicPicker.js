@@ -1,7 +1,12 @@
 import React, { useState, useRef } from "react"; // Import useRef
 import { Row, Col, Form, Button, ListGroup, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShuffle, faCopy, faRedo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShuffle,
+  faRedo,
+  faCopy as faCopySolid,
+} from "@fortawesome/free-solid-svg-icons";
+import { faCopy as faCopyRegular } from "@fortawesome/free-regular-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const TopicPicker = () => {
@@ -113,7 +118,10 @@ const TopicPicker = () => {
             ))}
           </ListGroup>
           <Button variant="success" className="mt-2" onClick={copyAllTopics}>
-            <FontAwesomeIcon icon={faCopy} className="me-2" />
+            <FontAwesomeIcon
+              icon={copyMessage ? faCopySolid : faCopyRegular}
+              className="me-2"
+            />
             {copyMessage ? "Đã sao chép" : "Sao chép"}
           </Button>
         </>
