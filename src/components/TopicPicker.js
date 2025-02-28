@@ -19,11 +19,6 @@ const TopicPicker = () => {
   const textareaRef = useRef(null); // Create ref
 
   const shuffleTopics = () => {
-    if (!topics.trim()) {
-      setError("Vui lòng nhập ít nhất một chủ đề.");
-      return;
-    }
-
     let topicArray = topics
       .split("\n")
       .map((topic) => topic.trim())
