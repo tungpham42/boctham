@@ -14,6 +14,7 @@ const TopicPicker = () => {
   const [shuffledTopics, setShuffledTopics] = useState([]);
   const [error, setError] = useState("");
   const [copyMessage, setCopyMessage] = useState("");
+  const [isShuffled, setIsShuffled] = useState(false);
 
   const textareaRef = useRef(null); // Create ref
 
@@ -22,16 +23,34 @@ const TopicPicker = () => {
       setError("Vui lòng nhập ít nhất một chủ đề.");
       return;
     }
-    setError("");
+
     let topicArray = topics
       .split("\n")
       .map((topic) => topic.trim())
       .filter((topic) => topic);
+
+    if (topicArray.length < 2) {
+      setError("Vui lòng nhập ít nhất hai chủ đề.");
+      return;
+    }
+
+    setError("");
     for (let i = topicArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [topicArray[i], topicArray[j]] = [topicArray[j], topicArray[i]];
     }
+
     setShuffledTopics(topicArray);
+    setIsShuffled(true);
+    textareaRef.current?.focus();
+  };
+
+  const resetForm = () => {
+    setTopics("");
+    setShuffledTopics([]);
+    setError("");
+    setCopyMessage("");
+    setIsShuffled(false); // Reset state
     textareaRef.current?.focus(); // Focus textarea
   };
 
@@ -47,14 +66,6 @@ const TopicPicker = () => {
       .map((topic, index) => `${index + 1}. ${topic}`)
       .join("\n");
     copyToClipboard(allText);
-    textareaRef.current?.focus(); // Focus textarea
-  };
-
-  const resetForm = () => {
-    setTopics("");
-    setShuffledTopics([]);
-    setError("");
-    setCopyMessage("");
     textareaRef.current?.focus(); // Focus textarea
   };
 
@@ -86,7 +97,7 @@ const TopicPicker = () => {
               onClick={shuffleTopics}
             >
               <FontAwesomeIcon icon={faShuffle} className="me-2" />
-              Bốc Thăm
+              {isShuffled ? "Bốc Lại" : "Bốc Thăm"}
             </Button>
           </Col>
           <Col xs={12} md={6} className="mt-2 mt-md-2">
