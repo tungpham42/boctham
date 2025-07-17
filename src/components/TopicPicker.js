@@ -65,8 +65,10 @@ const TopicPicker = () => {
   };
 
   return (
-    <Card className="p-3 shadow-lg">
-      <h1 className="h3">Bốc Thăm Nhóm Chủ Đề</h1>
+    <Card className="p-4 shadow-lg bg-white">
+      <h1 className="display-6 fw-semibold mb-3 text-primary">
+        🎯 Bốc Thăm Nhóm Chủ Đề
+      </h1>
       <Form className="d-flex flex-column">
         <Form.Group>
           <Form.Label>
@@ -138,7 +140,7 @@ const TopicPicker = () => {
         target="_blank"
         rel="noopener noreferrer"
         style={{ width: "fit-content" }}
-        className="text-dark text-decoration-none mt-3"
+        className="text-dark text-decoration-none mt-3 mb-1 d-inline-block"
       >
         <FontAwesomeIcon icon={faGithub} className="me-1" />
         MIT License
